@@ -15,7 +15,7 @@ const COOKIE_MAX_AGE = 24 * 60 * 60 * 1000;
 const getAuthCookieOptions = () => ({
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "lax" as const,
+  sameSite: "none" as const,
   path: "/",
   maxAge: COOKIE_MAX_AGE,
 });
@@ -24,7 +24,7 @@ const getAuthCookieOptions = () => ({
 const getAuthCookieClearOptions = () => ({
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "lax" as const,
+  sameSite: "none" as const,
   path: "/",
 });
 
