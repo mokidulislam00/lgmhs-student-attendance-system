@@ -117,7 +117,7 @@ export default function AppLayout({
 
   if (isDashboard) {
     return (
-      <div className="min-h-screen bg-[#f6f8fc] text-slate-800">
+      <div className="min-h-screen min-w-0 bg-[#f6f8fc] text-slate-800">
         {/* Hide Sidebar Scrollbar Without Disabling Scrolling */}
         <style jsx global>{`
           .sidebar-scrollbar-hidden {
@@ -343,45 +343,51 @@ export default function AppLayout({
             )}
           </header>
 
-          <div className="min-h-[calc(100vh-76px)]">{children}</div>
+          <div className="min-h-[calc(100vh-76px)] min-w-0">
+            {children}
+          </div>
         </main>
       </div>
     );
   }
 
-  // Other pages use a simple top navigation bar.
+  // Other pages use a responsive top navigation bar.
   return (
-    <div className="min-h-screen bg-[#f6f8fc] text-slate-800">
+    <div className="min-h-screen min-w-0 overflow-x-clip bg-[#f6f8fc] text-slate-800">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white shadow-sm">
-        <div className="mx-auto flex min-h-[76px] max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[76px] w-full min-w-0 max-w-[1600px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 lg:px-8">
           {/* School Logo and Branding */}
           <Link
             href="/"
-            className="flex min-w-0 shrink-0 items-center gap-3 rounded-xl transition hover:opacity-90"
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-xl transition hover:opacity-90 sm:gap-3"
           >
-            <div className="relative flex h-[60px] w-[60px] shrink-0 items-center justify-center">
+            <div className="relative flex h-[42px] w-[42px] shrink-0 items-center justify-center sm:h-[50px] sm:w-[50px] lg:h-[60px] lg:w-[60px]">
               <Image
                 src={SCHOOL_LOGO}
                 alt="Lalmohan Govt Model High School Logo"
                 width={512}
                 height={512}
                 priority
-                className="h-[60px] w-[60px] object-contain drop-shadow-sm"
+                className="h-full w-full object-contain drop-shadow-sm"
               />
             </div>
 
-            <div className="min-w-0">
-              <h1 className="text-base font-bold tracking-wide text-slate-800">
-                Lalmohan Govt. Model High School
+            <div className="min-w-0 flex-1">
+              <h1 className="truncate text-sm font-bold tracking-wide text-slate-800 sm:text-base">
+                <span className="sm:hidden">LGMHS</span>
+                <span className="hidden sm:inline">
+                  Lalmohan Govt. Model High School
+                </span>
               </h1>
-              <p className="text-[10px] text-slate-400">
+
+              <p className="truncate text-[9px] text-slate-400 sm:text-[10px]">
                 Student Attendance System
               </p>
             </div>
           </Link>
 
           {/* Desktop navigation */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden shrink-0 items-center gap-1 lg:flex">
             {roleNavigation.map((item) => {
               const Icon = item.icon;
 
@@ -479,7 +485,7 @@ export default function AppLayout({
               onClick={() => setMobileMenuOpen((open) => !open)}
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
-              className="rounded-lg p-2 text-slate-600 transition hover:bg-slate-100 lg:hidden"
+              className="shrink-0 rounded-lg p-2 text-slate-600 transition hover:bg-slate-100 lg:hidden"
             >
               {mobileMenuOpen ? <X size={21} /> : <Menu size={21} />}
             </button>
@@ -585,7 +591,9 @@ export default function AppLayout({
         )}
       </header>
 
-      <main className="min-h-[calc(100vh-76px)]">{children}</main>
+      <main className="min-h-[calc(100vh-76px)] min-w-0 w-full overflow-x-clip">
+        {children}
+      </main>
     </div>
   );
 }

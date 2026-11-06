@@ -11,11 +11,13 @@ const AUTH_COOKIE_NAME = "lgmhs_access_token";
 const TOKEN_EXPIRES_IN = "1d";
 const COOKIE_MAX_AGE = 24 * 60 * 60 * 1000;
 
-// Cookie configuration
+// Environment-based Cookie configuration
+const isProduction = process.env.NODE_ENV === "production";
+
 const getAuthCookieOptions = () => ({
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "none" as const,
+  secure: isProduction,
+  sameSite: (isProduction ? "none" : "lax") as "none" | "lax",
   path: "/",
   maxAge: COOKIE_MAX_AGE,
 });
@@ -23,8 +25,8 @@ const getAuthCookieOptions = () => ({
 // Cookie clearing configuration
 const getAuthCookieClearOptions = () => ({
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "none" as const,
+  secure: isProduction,
+  sameSite: (isProduction ? "none" : "lax") as "none" | "lax",
   path: "/",
 });
 
