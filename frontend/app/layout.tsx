@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -23,6 +22,10 @@ export const metadata: Metadata = {
   },
   description:
     "A modern student attendance management system for Lalmohan Govt Model High School.",
+
+  verification: {
+    google: "URiEAMlcQIlwUjWeoDRGF4viOf2l5NUaDGqCShF5R8g",
+  },
 };
 
 export default function RootLayout({
